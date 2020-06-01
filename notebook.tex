@@ -1,0 +1,1440 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{student\_intervention}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Machine Learning Engineer
+Nanodegree}\label{machine-learning-engineer-nanodegree}
+
+\subsection{Supervised Learning}\label{supervised-learning}
+
+\subsection{Project 2: Building a Student Intervention
+System}\label{project-2-building-a-student-intervention-system}
+
+    Welcome to the second project of the Machine Learning Engineer
+Nanodegree! In this notebook, some template code has already been
+provided for you, and it will be your job to implement the additional
+functionality necessary to successfully complete this project. Sections
+that begin with \textbf{'Implementation'} in the header indicate that
+the following block of code will require additional functionality which
+you must provide. Instructions will be provided for each section and the
+specifics of the implementation are marked in the code block with a
+\texttt{\textquotesingle{}TODO\textquotesingle{}} statement. Please be
+sure to read the instructions carefully!
+
+In addition to implementing code, there will be questions that you must
+answer which relate to the project and your implementation. Each section
+where you will answer a question is preceded by a \textbf{'Question X'}
+header. Carefully read each question and provide thorough answers in the
+following text boxes that begin with \textbf{'Answer:'}. Your project
+submission will be evaluated based on your answers to each of the
+questions and the implementation you provide.
+
+\begin{quote}
+\textbf{Note:} Code and Markdown cells can be executed using the
+\textbf{Shift + Enter} keyboard shortcut. In addition, Markdown cells
+can be edited by typically double-clicking the cell to enter edit mode.
+\end{quote}
+
+    \subsubsection{Question 1 - Classification vs.
+Regression}\label{question-1---classification-vs.-regression}
+
+\emph{Your goal for this project is to identify students who might need
+early intervention before they fail to graduate. Which type of
+supervised learning problem is this, classification or regression? Why?}
+
+    \textbf{Answer: } Classification, because the output will be binary (the
+student may pass or fail to graduate). There are no underlying values
+between these 2 results.
+
+    \subsection{Exploring the Data}\label{exploring-the-data}
+
+Run the code cell below to load necessary Python libraries and load the
+student data. Note that the last column from this dataset,
+\texttt{\textquotesingle{}passed\textquotesingle{}}, will be our target
+label (whether the student graduated or didn't graduate). All other
+columns are features about each student.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{c+c1}{\PYZsh{} Import libraries}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} 
+          \PY{k+kn}{from} \PY{n+nn}{time} \PY{k}{import} \PY{n}{time}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{f1\PYZus{}score}
+          \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}
+          
+          \PY{c+c1}{\PYZsh{} Read student data}
+          \PY{n}{student\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{student\PYZhy{}data.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Student data read successfully!}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Student data read successfully!
+
+    \end{Verbatim}
+
+    \subsubsection{Implementation: Data
+Exploration}\label{implementation-data-exploration}
+
+Let's begin by investigating the dataset to determine how many students
+we have information on, and learn about the graduation rate among these
+students. In the code cell below, you will need to compute the
+following: - The total number of students, \texttt{n\_students}. - The
+total number of features for each student, \texttt{n\_features}. - The
+number of those students who passed, \texttt{n\_passed}. - The number of
+those students who failed, \texttt{n\_failed}. - The graduation rate of
+the class, \texttt{grad\_rate}, in percent (\%).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{c+c1}{\PYZsh{} I removed my describe and counter functions from the last submission, now i\PYZsq{}m using only expressions that returns}
+          \PY{c+c1}{\PYZsh{} just what the problem asks me, but you got to admit, i got it right from the first time.}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Calculate number of students}
+          \PY{n}{n\PYZus{}students} \PY{o}{=} \PY{n}{student\PYZus{}data}\PY{o}{.}\PY{n}{passed}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} i used the passed column, could be any other, ex: Pstatus will give the same value}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Calculate number of features}
+          \PY{n}{n\PYZus{}features} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{student\PYZus{}data}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} 1 column is the passed / failed}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Calculate passing students}
+          \PY{n}{n\PYZus{}passed} \PY{o}{=} \PY{n}{student\PYZus{}data}\PY{o}{.}\PY{n}{passed}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Calculate failing students}
+          \PY{n}{n\PYZus{}failed} \PY{o}{=} \PY{n}{student\PYZus{}data}\PY{o}{.}\PY{n}{passed}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Calculate graduation rate}
+          \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{division}
+          \PY{n}{grad\PYZus{}rate} \PY{o}{=} \PY{n}{n\PYZus{}passed} \PY{o}{/} \PY{n}{n\PYZus{}students} \PY{o}{*} \PY{l+m+mi}{100}
+          
+          \PY{c+c1}{\PYZsh{} Print the results}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total number of students: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}students}\PY{p}{)}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of features: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{)}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of students who passed: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}passed}\PY{p}{)}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Graduation rate of the class: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{grad\PYZus{}rate}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total number of students: 395
+Number of features: 30
+Number of students who passed: 265
+Graduation rate of the class: 67.09\%
+
+    \end{Verbatim}
+
+    \subsection{Preparing the Data}\label{preparing-the-data}
+
+In this section, we will prepare the data for modeling, training and
+testing.
+
+\subsubsection{Identify feature and target
+columns}\label{identify-feature-and-target-columns}
+
+It is often the case that the data you obtain contains non-numeric
+features. This can be a problem, as most machine learning algorithms
+expect numeric data to perform computations with.
+
+Run the code cell below to separate the student data into feature and
+target columns to see if any features are non-numeric.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{c+c1}{\PYZsh{} Extract feature columns}
+          \PY{n}{feature\PYZus{}cols} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{student\PYZus{}data}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Extract target column \PYZsq{}passed\PYZsq{}}
+          \PY{n}{target\PYZus{}col} \PY{o}{=} \PY{n}{student\PYZus{}data}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} 
+          
+          \PY{c+c1}{\PYZsh{} Show the list of columns}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Feature columns:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{feature\PYZus{}cols}\PY{p}{)}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Target column: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{target\PYZus{}col}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Separate the data into feature data and target data (X\PYZus{}all and y\PYZus{}all, respectively)}
+          \PY{n}{X\PYZus{}all} \PY{o}{=} \PY{n}{student\PYZus{}data}\PY{p}{[}\PY{n}{feature\PYZus{}cols}\PY{p}{]}
+          \PY{n}{y\PYZus{}all} \PY{o}{=} \PY{n}{student\PYZus{}data}\PY{p}{[}\PY{n}{target\PYZus{}col}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} Show the feature information by printing the first five rows}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Feature values:}\PY{l+s+s2}{\PYZdq{}}
+          \PY{n+nb}{print} \PY{n}{X\PYZus{}all}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Feature columns:
+['school', 'sex', 'age', 'address', 'famsize', 'Pstatus', 'Medu', 'Fedu', 'Mjob', 'Fjob', 'reason', 'guardian', 'traveltime', 'studytime', 'failures', 'schoolsup', 'famsup', 'paid', 'activities', 'nursery', 'higher', 'internet', 'romantic', 'famrel', 'freetime', 'goout', 'Dalc', 'Walc', 'health', 'absences']
+
+Target column: passed
+
+Feature values:
+  school sex  age address famsize Pstatus  Medu  Fedu     Mjob      Fjob  \textbackslash{}
+0     GP   F   18       U     GT3       A     4     4  at\_home   teacher   
+1     GP   F   17       U     GT3       T     1     1  at\_home     other   
+2     GP   F   15       U     LE3       T     1     1  at\_home     other   
+3     GP   F   15       U     GT3       T     4     2   health  services   
+4     GP   F   16       U     GT3       T     3     3    other     other   
+
+    {\ldots}    higher internet  romantic  famrel  freetime goout Dalc Walc health  \textbackslash{}
+0   {\ldots}       yes       no        no       4         3     4    1    1      3   
+1   {\ldots}       yes      yes        no       5         3     3    1    1      3   
+2   {\ldots}       yes      yes        no       4         3     2    2    3      3   
+3   {\ldots}       yes      yes       yes       3         2     2    1    1      5   
+4   {\ldots}       yes       no        no       4         3     2    1    2      5   
+
+  absences  
+0        6  
+1        4  
+2       10  
+3        2  
+4        4  
+
+[5 rows x 30 columns]
+
+    \end{Verbatim}
+
+    \subsubsection{Preprocess Feature
+Columns}\label{preprocess-feature-columns}
+
+As you can see, there are several non-numeric columns that need to be
+converted! Many of them are simply \texttt{yes}/\texttt{no}, e.g.
+\texttt{internet}. These can be reasonably converted into
+\texttt{1}/\texttt{0} (binary) values.
+
+Other columns, like \texttt{Mjob} and \texttt{Fjob}, have more than two
+values, and are known as \emph{categorical variables}. The recommended
+way to handle such a column is to create as many columns as possible
+values (e.g. \texttt{Fjob\_teacher}, \texttt{Fjob\_other},
+\texttt{Fjob\_services}, etc.), and assign a \texttt{1} to one of them
+and \texttt{0} to all others.
+
+These generated columns are sometimes called \emph{dummy variables}, and
+we will use the
+\href{http://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html?highlight=get_dummies\#pandas.get_dummies}{\texttt{pandas.get\_dummies()}}
+function to perform this transformation. Run the code cell below to
+perform the preprocessing routine discussed in this section.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{k}{def} \PY{n+nf}{preprocess\PYZus{}features}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Preprocesses the student data and converts non\PYZhy{}numeric binary variables into}
+          \PY{l+s+sd}{        binary (0/1) variables. Converts categorical variables into dummy variables. \PYZsq{}\PYZsq{}\PYZsq{}}
+              
+              \PY{c+c1}{\PYZsh{} Initialize new output DataFrame}
+              \PY{n}{output} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} Investigate each feature column for the data}
+              \PY{k}{for} \PY{n}{col}\PY{p}{,} \PY{n}{col\PYZus{}data} \PY{o+ow}{in} \PY{n}{X}\PY{o}{.}\PY{n}{iteritems}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                  
+                  \PY{c+c1}{\PYZsh{} If data type is non\PYZhy{}numeric, replace all yes/no values with 1/0}
+                  \PY{k}{if} \PY{n}{col\PYZus{}data}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{n+nb}{object}\PY{p}{:}
+                      \PY{n}{col\PYZus{}data} \PY{o}{=} \PY{n}{col\PYZus{}data}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{} If data type is categorical, convert to dummy variables}
+                  \PY{k}{if} \PY{n}{col\PYZus{}data}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{n+nb}{object}\PY{p}{:}
+                      \PY{c+c1}{\PYZsh{} Example: \PYZsq{}school\PYZsq{} =\PYZgt{} \PYZsq{}school\PYZus{}GP\PYZsq{} and \PYZsq{}school\PYZus{}MS\PYZsq{}}
+                      \PY{n}{col\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{col\PYZus{}data}\PY{p}{,} \PY{n}{prefix} \PY{o}{=} \PY{n}{col}\PY{p}{)}  
+                  
+                  \PY{c+c1}{\PYZsh{} Collect the revised columns}
+                  \PY{n}{output} \PY{o}{=} \PY{n}{output}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{col\PYZus{}data}\PY{p}{)}
+              
+              \PY{k}{return} \PY{n}{output}
+          
+          \PY{n}{X\PYZus{}all} \PY{o}{=} \PY{n}{preprocess\PYZus{}features}\PY{p}{(}\PY{n}{X\PYZus{}all}\PY{p}{)}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Processed feature columns (}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ total features):}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}all}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{X\PYZus{}all}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Processed feature columns (48 total features):
+['school\_GP', 'school\_MS', 'sex\_F', 'sex\_M', 'age', 'address\_R', 'address\_U', 'famsize\_GT3', 'famsize\_LE3', 'Pstatus\_A', 'Pstatus\_T', 'Medu', 'Fedu', 'Mjob\_at\_home', 'Mjob\_health', 'Mjob\_other', 'Mjob\_services', 'Mjob\_teacher', 'Fjob\_at\_home', 'Fjob\_health', 'Fjob\_other', 'Fjob\_services', 'Fjob\_teacher', 'reason\_course', 'reason\_home', 'reason\_other', 'reason\_reputation', 'guardian\_father', 'guardian\_mother', 'guardian\_other', 'traveltime', 'studytime', 'failures', 'schoolsup', 'famsup', 'paid', 'activities', 'nursery', 'higher', 'internet', 'romantic', 'famrel', 'freetime', 'goout', 'Dalc', 'Walc', 'health', 'absences']
+
+    \end{Verbatim}
+
+    \subsubsection{Implementation: Training and Testing Data
+Split}\label{implementation-training-and-testing-data-split}
+
+So far, we have converted all \emph{categorical} features into numeric
+values. For the next step, we split the data (both features and
+corresponding labels) into training and test sets. In the following code
+cell below, you will need to implement the following: - Randomly shuffle
+and split the data (\texttt{X\_all}, \texttt{y\_all}) into training and
+testing subsets. - Use 300 training points (approximately 75\%) and 95
+testing points (approximately 25\%). - Set a \texttt{random\_state} for
+the function(s) you use, if provided. - Store the results in
+\texttt{X\_train}, \texttt{X\_test}, \texttt{y\_train}, and
+\texttt{y\_test}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{c+c1}{\PYZsh{} TODO: Import any additional functionality you may need here}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cross\PYZus{}validation} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Set the number of training points}
+          \PY{n}{num\PYZus{}train} \PY{o}{=} \PY{l+m+mi}{300}
+          
+          \PY{c+c1}{\PYZsh{} Set the number of testing points}
+          \PY{n}{num\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}all}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{num\PYZus{}train}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Shuffle and split the dataset into the number of training and testing points above}
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}  \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X\PYZus{}all}\PY{p}{,} \PY{n}{y\PYZus{}all}\PY{p}{,} \PY{n}{train\PYZus{}size}\PY{o}{=}\PY{n}{num\PYZus{}train}\PY{p}{,} \PY{n}{stratify}\PY{o}{=}\PY{n}{y\PYZus{}all}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.24}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}X\PYZus{}train, X\PYZus{}test, y\PYZus{}train, y\PYZus{}test = train\PYZus{}test\PYZus{}split(X\PYZus{}all, y\PYZus{}all, train\PYZus{}size=num\PYZus{}train, test\PYZus{}size=num\PYZus{}test, random\PYZus{}state=42)}
+          
+          \PY{c+c1}{\PYZsh{} Show the results of the split}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set has }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ samples.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing set has }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ samples.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training set has 300 samples.
+Testing set has 95 samples.
+
+    \end{Verbatim}
+
+    \subsection{Training and Evaluating
+Models}\label{training-and-evaluating-models}
+
+In this section, you will choose 3 supervised learning models that are
+appropriate for this problem and available in \texttt{scikit-learn}. You
+will first discuss the reasoning behind choosing these three models by
+considering what you know about the data and each model's strengths and
+weaknesses. You will then fit the model to varying sizes of training
+data (100 data points, 200 data points, and 300 data points) and measure
+the F1 score. You will need to produce three tables (one for each model)
+that shows the training set size, training time, prediction time, F1
+score on the training set, and F1 score on the testing set.
+
+\textbf{The following supervised learning models are currently available
+in}
+\href{http://scikit-learn.org/stable/supervised_learning.html}{\texttt{scikit-learn}}
+\textbf{that you may choose from:} - Gaussian Naive Bayes (GaussianNB) -
+Decision Trees - Ensemble Methods (Bagging, AdaBoost, Random Forest,
+Gradient Boosting) - K-Nearest Neighbors (KNeighbors) - Stochastic
+Gradient Descent (SGDC) - Support Vector Machines (SVM) - Logistic
+Regression
+
+    \subsubsection{Question 2 - Model
+Application}\label{question-2---model-application}
+
+\emph{List three supervised learning models that are appropriate for
+this problem. For each model chosen} - Describe one real-world
+application in industry where the model can be applied. \emph{(You may
+need to do a small bit of research for this --- give references!)} -
+What are the strengths of the model; when does it perform well? - What
+are the weaknesses of the model; when does it perform poorly? - What
+makes this model a good candidate for the problem, given what you know
+about the data?
+
+    \textbf{Answer: } Naive Bayes, SVM and Random Forest were chosen.
+
+\subsection{Naive Bayes}\label{naive-bayes}
+
+\paragraph{Naive Bayes applicability:}\label{naive-bayes-applicability}
+
+The emails providers that we use today utilize this method to classify
+emails as spams and no spams. This model was selected because it
+utilizes a naive classifier, it utilizes the Bayes rule to get a subset
+of words from the mail and uses a bag of words previously trainned in
+the model to take its decision, this will serve as base for the spam /
+no spam guess as you can see in this article here:
+
+https://web.stanford.edu/class/cs124/lec/naivebayes.pdf
+
+\paragraph{Naive Bayes strenghts:}\label{naive-bayes-strenghts}
+
+One of the fastest models available;
+
+It takes features independently. In the end, all features contribute to
+the probability of the output (Naive);
+
+Performs better in categorical values;
+
+\paragraph{Naive Bayes Weaknesses:}\label{naive-bayes-weaknesses}
+
+It doesn't consider records from test data which weren't present in the
+training data. Proper data treatment could reduce the amount of
+disconsidered values.
+
+Does not perform well in numerical values;
+
+\paragraph{Why it's a good model for this
+problem:}\label{why-its-a-good-model-for-this-problem}
+
+Most of our data is categorical, so we can expect a good performance
+with a low computational costs.
+
+\subsection{Support Vector Machines}\label{support-vector-machines}
+
+\paragraph{Support Vector Machines
+applicability:}\label{support-vector-machines-applicability}
+
+In chemistry, elements tend to have particular characteristics that are
+integer, such as atomic mass, charge, eletronic spin, etc, the SVM
+method takes advantage of those clear margins between the features to
+classify the records utilizing lines, planes and hyperplanes (depending
+on the record dimensionality) as we can see in this article (page 59),
+there's a section where they use this algorithm to classify the
+similarity between sequences of aminoacidis, this is a key point to
+predict this sequence biological properties.
+
+http://www.ivanciuc.org/Files/Reprint/Ivanciuc\_Applications\_of\_Support\_Vector\_Machines\_in\_Chemistry.pdf
+
+\paragraph{Support Vector Machines
+strenghts:}\label{support-vector-machines-strenghts}
+
+It works better when there's a clear margin between the classifiers;
+
+It works well in models with several dimensions;
+
+It is effective when there are more dimensions than samples;
+
+\paragraph{Support Vector Machines
+weaknesses:}\label{support-vector-machines-weaknesses}
+
+It requires a lot of processing to perform;
+
+It doesn't perform well when dimensions are overlaping;
+
+\paragraph{Why it's a good model for this
+problem:}\label{why-its-a-good-model-for-this-problem-1}
+
+Dataset is small, so there is no concern about performance. Therefore,
+this model would fit if the classes are free from too much noise.
+
+\subsection{Random Forest}\label{random-forest}
+
+\paragraph{Random Forest
+applicability:}\label{random-forest-applicability}
+
+Random Forest is the method that creates several classifiers and
+aggregate its results, this method can be implemented in computer vision
+to classify parts of the body, it basically generates several different
+decision trees and once new data comes, the algorithm passes this data
+in each decision tree, they all take its guess about what part this data
+is and than we see which part got the most votes. We can see an
+application of this method in this article:
+
+http://pages.iai.uni-bonn.de/frintrop\_simone//BVW13/BVW-gall.pdf
+
+\paragraph{Random Forest strenghts:}\label{random-forest-strenghts}
+
+It has a great performance among other algorithms;
+
+It runs well enough in large datasets;
+
+The overfitting can be reduced by increasing the number of trees;
+
+\paragraph{Random Forest weaknesses:}\label{random-forest-weaknesses}
+
+It can be very sensitive to small perturbations on the data;
+
+It's hard to avoid overfitting. Prior analysis are required for that;
+
+\paragraph{Why it's a good model for this
+problem:}\label{why-its-a-good-model-for-this-problem-2}
+
+This model can generalize very well among other models and it shows a
+very high rate of accuracy.
+
+    \subsubsection{Setup}\label{setup}
+
+Run the code cell below to initialize three helper functions which you
+can use for training and testing the three supervised learning models
+you've chosen above. The functions are as follows: -
+\texttt{train\_classifier} - takes as input a classifier and training
+data and fits the classifier to the data. - \texttt{predict\_labels} -
+takes as input a fit classifier, features, and a target labeling and
+makes predictions using the F1 score. - \texttt{train\_predict} - takes
+as input a classifier, and the training and testing data, and performs
+\texttt{train\_clasifier} and \texttt{predict\_labels}. - This function
+will report the F1 score for both the training and testing data
+separately.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{k}{def} \PY{n+nf}{train\PYZus{}classifier}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Fits a classifier to the training data. \PYZsq{}\PYZsq{}\PYZsq{}}
+              
+              \PY{c+c1}{\PYZsh{} Start the clock, train the classifier, then stop the clock}
+              \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+              \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+              \PY{n}{end} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Print the results}
+              \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Trained model in }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{ seconds}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}
+          
+              
+          \PY{k}{def} \PY{n+nf}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{features}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Makes predictions using a fit classifier based on F1 score. \PYZsq{}\PYZsq{}\PYZsq{}}
+              
+              \PY{c+c1}{\PYZsh{} Start the clock, make predictions, then stop the clock}
+              \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+              \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{features}\PY{p}{)}
+              \PY{n}{end} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Print and return results}
+              \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Made predictions in }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{ seconds.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}
+              \PY{k}{return} \PY{n}{f1\PYZus{}score}\PY{p}{(}\PY{n}{target}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{pos\PYZus{}label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          
+          \PY{k}{def} \PY{n+nf}{train\PYZus{}predict}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Train and predict using a classifer based on F1 score. \PYZsq{}\PYZsq{}\PYZsq{}}
+              
+              \PY{c+c1}{\PYZsh{} Indicate the classifier and the training set size}
+              \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training a }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ using a training set size of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{. . .}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Train the classifier}
+              \PY{n}{train\PYZus{}classifier}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Print the results of prediction for both training and testing}
+              \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1 score for training set: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1 score for test set: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Implementation: Model Performance
+Metrics}\label{implementation-model-performance-metrics}
+
+With the predefined functions above, you will now import the three
+supervised learning models of your choice and run the
+\texttt{train\_predict} function for each one. Remember that you will
+need to train and predict on each classifier for three different
+training set sizes: 100, 200, and 300. Hence, you should expect to have
+9 different outputs below --- 3 for each model using the varying
+training set sizes. In the following code cell, you will need to
+implement the following: - Import the three supervised learning models
+you've discussed in the previous section. - Initialize the three models
+and store them in \texttt{clf\_A}, \texttt{clf\_B}, and \texttt{clf\_C}.
+- Use a \texttt{random\_state} for each model you use, if provided. -
+\textbf{Note:} Use the default settings for each model --- you will tune
+one specific model in a later section. - Create the different training
+set sizes to be used to train each model. - \emph{Do not reshuffle and
+resplit the data! The new training points should be drawn from
+\texttt{X\_train} and \texttt{y\_train}.} - Fit each model with each
+training set size and make predictions on the test set (9 in total).\\
+\textbf{Note:} Three tables are provided after the following code cell
+which can be used to store your results.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{c+c1}{\PYZsh{} TODO: Import the three supervised learning models from sklearn}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{naive\PYZus{}bayes} \PY{k}{import} \PY{n}{GaussianNB}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Initialize the three models}
+          \PY{n}{clf\PYZus{}A} \PY{o}{=} \PY{n}{GaussianNB}\PY{p}{(}\PY{p}{)}
+          \PY{n}{clf\PYZus{}B} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+          \PY{n}{clf\PYZus{}C} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Set up the training set sizes}
+          \PY{k}{for} \PY{n}{clf} \PY{o+ow}{in} \PY{p}{[}\PY{n}{clf\PYZus{}A}\PY{p}{,} \PY{n}{clf\PYZus{}B}\PY{p}{,} \PY{n}{clf\PYZus{}C}\PY{p}{]}\PY{p}{:}
+              \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{300}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{:}
+                  \PY{n}{X\PYZus{}train\PYZus{}n} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{n}{n}\PY{p}{]}
+                  \PY{n}{y\PYZus{}train\PYZus{}n} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{n}{n}\PY{p}{]}
+                  \PY{n}{train\PYZus{}predict}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X\PYZus{}train\PYZus{}n}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}n}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+                  \PY{n+nb}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training a GaussianNB using a training set size of 300. . .
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+F1 score for training set: 0.8134.
+Made predictions in 0.0010 seconds.
+F1 score for test set: 0.7761.
+
+
+Training a GaussianNB using a training set size of 200. . .
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+F1 score for training set: 0.8060.
+Made predictions in 0.0000 seconds.
+F1 score for test set: 0.7218.
+
+
+Training a GaussianNB using a training set size of 100. . .
+Trained model in 0.0010 seconds
+Made predictions in 0.0000 seconds.
+F1 score for training set: 0.7752.
+Made predictions in 0.0010 seconds.
+F1 score for test set: 0.6457.
+
+
+Training a SVC using a training set size of 300. . .
+Trained model in 0.0160 seconds
+Made predictions in 0.0090 seconds.
+F1 score for training set: 0.8664.
+Made predictions in 0.0030 seconds.
+F1 score for test set: 0.8052.
+
+
+Training a SVC using a training set size of 200. . .
+Trained model in 0.0080 seconds
+Made predictions in 0.0040 seconds.
+F1 score for training set: 0.8431.
+Made predictions in 0.0020 seconds.
+F1 score for test set: 0.8105.
+
+
+Training a SVC using a training set size of 100. . .
+Trained model in 0.0020 seconds
+Made predictions in 0.0020 seconds.
+F1 score for training set: 0.8354.
+Made predictions in 0.0010 seconds.
+F1 score for test set: 0.8025.
+
+
+Training a RandomForestClassifier using a training set size of 300. . .
+Trained model in 0.0320 seconds
+Made predictions in 0.0020 seconds.
+F1 score for training set: 0.9975.
+Made predictions in 0.0020 seconds.
+F1 score for test set: 0.7132.
+
+
+Training a RandomForestClassifier using a training set size of 200. . .
+Trained model in 0.0270 seconds
+Made predictions in 0.0020 seconds.
+F1 score for training set: 0.9885.
+Made predictions in 0.0010 seconds.
+F1 score for test set: 0.6822.
+
+
+Training a RandomForestClassifier using a training set size of 100. . .
+Trained model in 0.0250 seconds
+Made predictions in 0.0020 seconds.
+F1 score for training set: 0.9924.
+Made predictions in 0.0010 seconds.
+F1 score for test set: 0.7368.
+
+
+
+    \end{Verbatim}
+
+    \subsubsection{Tabular Results}\label{tabular-results}
+
+Edit the cell below to see how a table can be designed in
+\href{https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\#tables}{Markdown}.
+You can record your results from above in the tables provided.
+
+    ** Classifer 1 - Naive Bayes**
+
+\begin{longtable}[]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.16\columnwidth}\centering\strut
+Training Set Size\strut
+\end{minipage} & \begin{minipage}[b]{0.21\columnwidth}\centering\strut
+Training Time\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Prediction Time (test)\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+F1 Score (train)\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
+F1 Score (test)\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+100\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\centering\strut
+0.0010\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.0000\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+0.7752\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.6457\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+200\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\centering\strut
+0.0020\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.0010\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+0.8060\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.7218\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+300\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\centering\strut
+0.0020\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.0010\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+0.8134\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.7761\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+** Classifer 2 - SVM **
+
+\begin{longtable}[]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.16\columnwidth}\centering\strut
+Training Set Size\strut
+\end{minipage} & \begin{minipage}[b]{0.21\columnwidth}\centering\strut
+Training Time\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Prediction Time (test)\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+F1 Score (train)\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
+F1 Score (test)\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+100\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\centering\strut
+0.0020\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.0020\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+0.8354\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.8025\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+200\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\centering\strut
+0.0080\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.0040\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+0.8431\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.8105\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+300\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\centering\strut
+0.0160\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.0090\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+0.8664\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.8052\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+** Classifer 3 - Random Forest **
+
+\begin{longtable}[]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.16\columnwidth}\centering\strut
+Training Set Size\strut
+\end{minipage} & \begin{minipage}[b]{0.21\columnwidth}\centering\strut
+Training Time\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Prediction Time (test)\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+F1 Score (train)\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
+F1 Score (test)\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+100\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\centering\strut
+0.0250\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.0020\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+0.9924\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.7368\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+200\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\centering\strut
+0.0270\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.0020\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+0.9885\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.6822\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+300\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\centering\strut
+0.0320\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.0020\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+0.9975\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.7132\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsection{Choosing the Best Model}\label{choosing-the-best-model}
+
+In this final section, you will choose from the three supervised
+learning models the \emph{best} model to use on the student data. You
+will then perform a grid search optimization for the model over the
+entire training set (\texttt{X\_train} and \texttt{y\_train}) by tuning
+at least one parameter to improve upon the untuned model's F1 score.
+
+    \subsubsection{Question 3 - Choosing the Best
+Model}\label{question-3---choosing-the-best-model}
+
+\emph{Based on the experiments you performed earlier, in one to two
+paragraphs, explain to the board of supervisors what single model you
+chose as the best model. Which model is generally the most appropriate
+based on the available data, limited resources, cost, and performance?}
+
+    \textbf{Answer: } First, i'll check how the model is performing based on
+different train/test ratios, let's see what this will get me
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          
+          \PY{n}{step\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{10}
+          
+          \PY{k}{def} \PY{n+nf}{get\PYZus{}F1}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{training\PYZus{}set\PYZus{}size}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{X\PYZus{}train\PYZus{}sample} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{n}{training\PYZus{}set\PYZus{}size}\PY{p}{]}
+                  \PY{n}{y\PYZus{}train\PYZus{}sample} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{n}{training\PYZus{}set\PYZus{}size}\PY{p}{]}
+                  \PY{n}{train\PYZus{}classifier}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X\PYZus{}train\PYZus{}sample}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}sample}\PY{p}{)}
+                  \PY{k}{return} \PY{n}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+              
+          \PY{n}{f1\PYZus{}list\PYZus{}all} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{clf} \PY{o+ow}{in} \PY{p}{[}\PY{n}{clf\PYZus{}A}\PY{p}{,} \PY{n}{clf\PYZus{}B}\PY{p}{,} \PY{n}{clf\PYZus{}C}\PY{p}{]}\PY{p}{:}
+              \PY{n}{f1\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{training\PYZus{}set\PYZus{}size} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{301}\PY{p}{,}\PY{n}{step\PYZus{}size}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{f1\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{get\PYZus{}F1}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{training\PYZus{}set\PYZus{}size}\PY{p}{)}\PY{p}{)}
+              \PY{n}{f1\PYZus{}list\PYZus{}all}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{f1\PYZus{}list}\PY{p}{)}
+              
+          \PY{c+c1}{\PYZsh{} Plot all lines, i changed the step for 1, 5 and 10 just to see the differences \PYZsh{}}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{301}\PY{p}{,}\PY{n}{step\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{f1\PYZus{}list\PYZus{}all}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Naive Bayes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{301}\PY{p}{,}\PY{n}{step\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{f1\PYZus{}list\PYZus{}all}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{301}\PY{p}{,}\PY{n}{step\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{f1\PYZus{}list\PYZus{}all}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Random Forest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Config axis \PYZsh{}}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training set size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1 score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}  
+          
+          \PY{c+c1}{\PYZsh{} Print  Chart \PYZsh{}}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Trained model in 0.0010 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0000 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0030 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0030 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0000 seconds.
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0030 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0030 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0030 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0030 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0040 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0040 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0040 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0050 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0050 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0050 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0230 seconds
+Made predictions in 0.0030 seconds.
+Trained model in 0.0070 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0090 seconds
+Made predictions in 0.0140 seconds.
+Trained model in 0.0110 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0080 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0080 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0090 seconds
+Made predictions in 0.0030 seconds.
+Trained model in 0.0270 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0250 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0260 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0270 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0250 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0240 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0240 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0260 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0250 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0260 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0270 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0280 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0350 seconds
+Made predictions in 0.0220 seconds.
+Trained model in 0.0570 seconds
+Made predictions in 0.0050 seconds.
+Trained model in 0.0640 seconds
+Made predictions in 0.0040 seconds.
+Trained model in 0.0560 seconds
+Made predictions in 0.0040 seconds.
+Trained model in 0.0550 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0520 seconds
+Made predictions in 0.0040 seconds.
+Trained model in 0.0560 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.0580 seconds
+Made predictions in 0.0040 seconds.
+Trained model in 0.0760 seconds
+Made predictions in 0.0030 seconds.
+Trained model in 0.0690 seconds
+Made predictions in 0.0060 seconds.
+Trained model in 0.0440 seconds
+Made predictions in 0.0010 seconds.
+Trained model in 0.0440 seconds
+Made predictions in 0.0020 seconds.
+Trained model in 0.1040 seconds
+Made predictions in 0.0050 seconds.
+Trained model in 0.1090 seconds
+Made predictions in 0.0090 seconds.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{n+nb}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1 mean for:}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n+nb}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Naive Bayes : }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1\PYZus{}list\PYZus{}all}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM (SVC) model : }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1\PYZus{}list\PYZus{}all}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Random Forests model : }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1\PYZus{}list\PYZus{}all}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+F1 mean for:
+Naive Bayes : 0.6926
+SVM (SVC) model : 0.8026
+Random Forests model : 0.7210
+
+    \end{Verbatim}
+
+    Those are the charts and mean values for each step that i found
+
+\begin{longtable}[]{@{}cccc@{}}
+\toprule
+Step Size & Naive Bayes & SVM & Random Forest\tabularnewline
+\midrule
+\endhead
+1 & 0.6946 & 0.8021 & 0.7282\tabularnewline
+5 & 0.6952 & 0.8023 & 0.7238\tabularnewline
+10 & 0.6926 & 0.8026 & 0.7210\tabularnewline
+\bottomrule
+\end{longtable}
+
+Indeed this doesn't vary much considering several train sets (step 1)
+and generalizing using bigger steps
+
+    \subsubsection{Step 1}\label{step-1}
+
+\subsubsection{Step 5}\label{step-5}
+
+\subsubsection{Step 10}\label{step-10}
+
+    Using these charts, we can tell that the SVM is the model that has less
+noise compared to the others. That, combined with its biggest f1 mean
+for all the tests that i did on the test set, makes this model the one i
+would chose for this particular problem, even knowing that the Naive
+Bayes takes less time to run, in this particular problem that we have
+such a small data set.
+
+    \subsubsection{Question 4 - Model in Layman's
+Terms}\label{question-4---model-in-laymans-terms}
+
+\emph{In one to two paragraphs, explain to the board of directors in
+layman's terms how the final model chosen is supposed to work. Be sure
+that you are describing the major qualities of the model, such as how
+the model is trained and how the model makes a prediction. Avoid using
+advanced mathematical or technical jargon, such as describing equations
+or discussing the algorithm implementation.}
+
+    \textbf{Answer: } The model that we selected for this problem uses the
+advantage of the clear separation between the classifiers to take its
+guesses. For example, imagine that we want to separate 100 red balls
+from 100 blue balls. Appart from the color, these balls are located in 2
+different rooms. In the first scenario, we can see both rooms, so we
+analyze that 90\% of the red balls are in the left room and 10\% of the
+red balls in right room. A moment later, the light of the rooms is
+turned off, a person comes to you from the left room and another from
+the right room. Each one of them gives you a ball, and you must choose
+the ball color without turning the lights on.
+
+Because of the previous knowledge you had (when the lights were on) your
+best guess is that the ball from the left room is red and the other one
+is blue. You guess that because you have mentally drawn a line between
+the rooms, using that separation to minimize the errors. Now imagine
+that apart from that information, you know that the red balls tend to be
+heavier and the blue balls tend to be lighter. Once you get them in your
+hands, you can combine the information given (where they came plus their
+weight) to improve even more your guess.
+
+This is basically what this model does, it trace lines between the
+parameters to separate the classes, once you have more parameters, it
+traces planes between them (called hyperplanes), a simple representation
+of this model is the following:
+
+When we start adding more dimensions, the visualization can become
+pretty complex, so this model is usualy represented in 2d or 3d for
+better understandment.
+
+    \subsubsection{Implementation: Model
+Tuning}\label{implementation-model-tuning}
+
+Fine tune the chosen model. Use grid search (\texttt{GridSearchCV}) with
+at least one important parameter tuned with at least 3 different values.
+You will need to use the entire training set for this. In the code cell
+below, you will need to implement the following: - Import
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html}{\texttt{sklearn.grid\_search.gridSearchCV}}
+and
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html}{\texttt{sklearn.metrics.make\_scorer}}.
+- Create a dictionary of parameters you wish to tune for the chosen
+model. - Example:
+\texttt{parameters\ =\ \{\textquotesingle{}parameter\textquotesingle{}\ :\ {[}list\ of\ values{]}\}}.
+- Initialize the classifier you've chosen and store it in \texttt{clf}.
+- Create the F1 scoring function using \texttt{make\_scorer} and store
+it in \texttt{f1\_scorer}. - Set the \texttt{pos\_label} parameter to
+the correct value! - Perform grid search on the classifier \texttt{clf}
+using \texttt{f1\_scorer} as the scoring method, and store it in
+\texttt{grid\_obj}. - Fit the grid search object to the training data
+(\texttt{X\_train}, \texttt{y\_train}), and store it in
+\texttt{grid\_obj}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{c+c1}{\PYZsh{} TODO: Import \PYZsq{}GridSearchCV\PYZsq{} and \PYZsq{}make\PYZus{}scorer\PYZsq{}}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{grid\PYZus{}search} \PY{k}{import} \PY{n}{GridSearchCV} 
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{make\PYZus{}scorer}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Create the parameters list you wish to tune}
+          \PY{n}{parameters} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigmoid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{[}\PY{n+nb}{pow}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{c}\PY{p}{)} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}\PY{p}{,} 
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gamma}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{[}\PY{n+nb}{pow}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{g}\PY{p}{)} \PY{k}{for} \PY{n}{g} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{degree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{[}\PY{n}{d} \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{]}\PY{p}{\PYZcb{}}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Initialize the classifier}
+          \PY{n}{clf} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Make an f1 scoring function using \PYZsq{}make\PYZus{}scorer\PYZsq{} }
+          \PY{n}{f1\PYZus{}scorer} \PY{o}{=} \PY{n}{make\PYZus{}scorer}\PY{p}{(}\PY{n}{f1\PYZus{}score}\PY{p}{,} \PY{n}{pos\PYZus{}label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Perform grid search on the classifier using the f1\PYZus{}scorer as the scoring method}
+          \PY{n}{grid\PYZus{}obj} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{parameters}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{n}{f1\PYZus{}scorer}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Fit the grid search object to the training data and find the optimal parameters}
+          \PY{n}{grid\PYZus{}obj} \PY{o}{=} \PY{n}{grid\PYZus{}obj}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Get the estimator}
+          \PY{n}{clf} \PY{o}{=} \PY{n}{grid\PYZus{}obj}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+          
+          \PY{c+c1}{\PYZsh{} Report the final F1 score for training and testing after parameter tuning}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tuned model has a training F1 score of }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tuned model has a testing F1 score of }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Made predictions in 0.0050 seconds.
+Tuned model has a training F1 score of 0.8319.
+Made predictions in 0.0020 seconds.
+Tuned model has a testing F1 score of 0.7947.
+
+    \end{Verbatim}
+
+    \subsubsection{Question 5 - Final F1
+Score}\label{question-5---final-f1-score}
+
+\emph{What is the final model's F1 score for training and testing? How
+does that score compare to the untuned model?}
+
+    \textbf{Answer: } With this tuned model, we got the following: *
+Training F1 Score 0.8319 (previous was 0.8431) * Testing F1 Score 0.7947
+(previous was 0.8105)
+
+I have explored several hyperparameters values and some combinations as
+a strategy of exaustive grid search so i can be sure i will get the best
+fit possible for this dataset. This result show us a better model
+against the non tuned one. The gap between the testing data and training
+data tends to be smaller in better models. That means we managed to
+avoid some of the overfitting that we had in the non tuned model.
+
+    \begin{quote}
+\textbf{Note}: Once you have completed all of the code implementations
+and successfully answered each question above, you may finalize your
+work by exporting the iPython Notebook as an HTML document. You can do
+this by using the menu above and navigating to\\
+\textbf{File -\textgreater{} Download as -\textgreater{} HTML (.html)}.
+Include the finished document along with this notebook as your
+submission.
+\end{quote}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
